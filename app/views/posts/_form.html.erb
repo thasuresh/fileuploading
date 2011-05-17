@@ -1,0 +1,38 @@
+<%= form_for @post,  :html => { :multipart => true } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  
+    <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  
+  <% f.fields_for  :assets do |asset_fields| %>
+  
+  <% if asset_fields.object.new_record? %>
+  <p>
+       <%= asset_fields.file_field  :asset %>
+  </p>
+  
+  <% end %>
+  <% end %>
+  
+  <% f.fields_for  :assets do |asset_fields| %>
+   <%unless asset_fields.object.new_record? %>
+   
+   <p>
+     
+     <%= link_to image_tag(asset_fields.object.asset.url(:thumb)), asset_fields.object.asset.url(:original)  %>
+   
+   <%= asset_fields.check_box :_destroy %>
+   </p>
+  
+  <% end %>
+  <% end %>
+  
+  
+  <p><%= f.submit %></p>
+<% end %>

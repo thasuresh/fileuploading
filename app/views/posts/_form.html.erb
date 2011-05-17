@@ -5,11 +5,7 @@
     <%= f.text_field :title %>
   </p>
   
-    <p>
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </p>
-  
+      
   <% f.fields_for  :assets do |asset_fields| %>
   
   <% if asset_fields.object.new_record? %>
